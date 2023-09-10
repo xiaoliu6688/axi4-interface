@@ -6,9 +6,10 @@ module axi_lite_slave (
 	axi_lite_if.slave s_axi_lite
 );
 
-	typedef enum logic [2 : 0] {IDLE, RADDR, RDATA, WADDR, WDATA, WRESP} state_type;
+	typedef eum logic [2 : 0] {IDLE, RADDR, RDATA, WADDR, WDATA, WRESP} state_type;
 	state_type state, next_state;
 
+	reg  [1:0] cnt;
 	addr_t addr;
 	data_t buffer[0 : 31];
 
@@ -22,7 +23,7 @@ module axi_lite_slave (
 
 	// AW
 	assign s_axi_lite.awready = (state == WADDR) ? 1 : 0;
-
+af
 	// W
 	assign s_axi_lite.wready = (state == WDATA) ? 1 : 0;
 
